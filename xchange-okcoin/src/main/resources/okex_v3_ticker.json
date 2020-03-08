@@ -1,0 +1,18 @@
+{
+  "best_ask": "8742.1",
+  "best_bid": "8742",
+  "instrument_id": "BTC-USDT",
+  "product_id": "BTC-USDT",
+  "last": "8742.3",
+  "last_qty": "0.3809249",
+  "ask": "8742.1",
+  "best_ask_size": "0.0169942",
+  "bid": "8742",
+  "best_bid_size": "4.58652816",
+  "open_24h": "9099.2",
+  "high_24h": "9188.6",
+  "low_24h": "8701.9",
+  "base_volume_24h": "47566.12788358",
+  "timestamp": "2020-03-08T03:25:44.108Z",
+  "quote_volume_24h": "426756993.6"
+}
