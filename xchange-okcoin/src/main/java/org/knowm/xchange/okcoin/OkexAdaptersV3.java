@@ -2,6 +2,7 @@ package org.knowm.xchange.okcoin;
 
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
+import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.Order.OrderType;
 import org.knowm.xchange.dto.account.Balance;
 import org.knowm.xchange.dto.account.FundingRecord;
@@ -96,7 +97,9 @@ public class OkexAdaptersV3 {
         .id(o.getOrderId())
         .limitPrice(o.getPrice())
         .originalAmount(o.getSize())
+        .cumulativeAmount(o.getFilledSize())
         .timestamp(o.getCreatedAt())
+        .orderStatus(convertOrderStatus(o.getState()))
         .build();
   }
 
@@ -113,6 +116,30 @@ public class OkexAdaptersV3 {
         .build();
   }
 
+  /**
+   * @param okexOrderState -2:失败 -1:撤单成功 0:等待成交 1:部分成交 2:完全成交 3:下单中 4:撤单中
+   * @return
+   */
+  private static Order.OrderStatus convertOrderStatus(String okexOrderState) {
+    switch (okexOrderState) {
+      case "-1":
+        return Order.OrderStatus.CANCELED;
+      case "0":
+        return Order.OrderStatus.NEW;
+      case "1":
+        return Order.OrderStatus.PARTIALLY_FILLED;
+      case "2":
+        return Order.OrderStatus.FILLED;
+      case "3":
+        return Order.OrderStatus.PENDING_NEW;
+      case "4":
+        return Order.OrderStatus.PENDING_CANCEL;
+      case "-2":
+        return Order.OrderStatus.REJECTED;
+      default:
+        return Order.OrderStatus.UNKNOWN;
+    }
+  }
   /**
    * -3:pending cancel; -2: cancelled; -1: failed; 0 :pending; 1 :sending; 2:sent; 3 :email
    * confirmation; 4 :manual confirmation; 5:awaiting identity confirmation
