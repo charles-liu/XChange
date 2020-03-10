@@ -15,6 +15,12 @@ public class OkexSpotTicker {
   @JsonProperty("best_bid")
   private BigDecimal bestBid;
 
+  @JsonProperty("best_ask_size")
+  private BigDecimal bestAskSize;
+
+  @JsonProperty("best_bid_size")
+  private BigDecimal bestBidSize;
+
   @JsonProperty("instrument_id")
   private String instrumentId;
 
@@ -22,8 +28,6 @@ public class OkexSpotTicker {
   private String productId;
 
   private BigDecimal last;
-  private BigDecimal ask;
-  private BigDecimal bid;
 
   @JsonProperty("open_24h")
   private BigDecimal open24h;
